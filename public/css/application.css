@@ -1,0 +1,46 @@
+.navbar-brand>img {
+  height: 100%;
+  padding: 15px;
+  width: 100px;
+}
+
+header {
+  background-image: url("/img/bitly_bg.jpg");
+  background-size: cover;
+  height: auto;
+}
+
+.template {
+  color: white;
+  padding: 10%;
+}
+
+#shorten_button{
+	background-color: #FF5A00;
+    color: white;
+}
+
+#link_input{
+	width: 50%;
+	height: 35px;
+}
+
+input:invalid {
+  background-color: #ffdddd;
+}
+
+input:valid {
+  background-color: #ddffdd;
+}
+
+
+th{
+    background-color: #FF5A00;
+    color: white;
+}
+
+@media (max-width: 576px){
+	#link_input{
+		width: 100%;
+	}
+}

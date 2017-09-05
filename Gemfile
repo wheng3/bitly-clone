@@ -27,6 +27,9 @@ gem 'rspec'
 # Adding byebug for debugging
 gem 'byebug'
 
+#Adding faker for seeds
+gem 'faker'
+
 group :development, :test do
 	# Adding shotgun for local web hosting
 	gem 'shotgun'

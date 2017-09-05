@@ -1,2 +1,65 @@
-<h1>Hello World</h1>
-<p>See Me in views/static/index.html.erb</p>
+<header>
+	<div class="container-fluid">
+		<nav class="navbar navbar-inverse navbar-dark navbar-expand-md navbar-fixed-top">
+			<a class="navbar-brand" href="#">
+				<img alt="Brand" src="/img/bitly_brand.jpg">
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+				<ul class="navbar-nav mr-auto">
+				  <li class="nav-item active">
+				    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+				  </li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+
+	<div class="container">
+		<div class="template">
+			<h1 class="text-center">THE LINK KNOWS ALL. SO CAN YOU.</h1><br>
+			<div class="text-center">Measure your links with Bitly, the world's leading link management platform.</div><br>
+			<div class="text-center">
+				<form class="form-horizontal" action="/urls" method="post">
+					<div class="form-group">
+						<div class="col-sm-10">
+						    <input id="link_input" type="url" name="long_url" placeholder="Place a link to shorten it" required>
+						    <input class="btn" id="shorten_button" type="submit" value="SHORTEN">
+					    </div>
+				    </div>
+				</form>
+				<div id="submission_message"><%= @flash %></div>
+			</div>
+		</div>
+	</div>
+</header>
+
+<div id="link_table">
+	<div class="container">
+		<div class="table-responsive">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Your URL</th>
+						<th>Shortened URL</th>
+						<th>Clicks</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @urls.each do |url| %>
+						<tr>
+							<td> <%= url.id %> </td> 
+							<td> <%= url.long_url %></td> 
+							<td> <a href='/<%= url.shortened_url %>'><%= request.base_url+'/'+url.shortened_url %></a></td>
+							<td> <%= url.click_count%> </td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
