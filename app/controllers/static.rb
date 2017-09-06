@@ -1,36 +1,44 @@
 get '/' do
-	@urls = Url.order(id: :desc)
+	@urls = Url.limit(5).order(id: :desc)
 	erb :"static/index", :locals => {:flash => @flash}
 end
 
 post '/urls' do
-	own_website = false
+	# own_website = false
 
-	if (params[:long_url]).include?("#{request.base_url}/")
-		own_website = true
-		short_portion_of_url = (params[:long_url]).gsub("#{request.base_url}/",'')
-		url = Url.find_by(shortened_url: short_portion_of_url)
+	# if (params[:long_url]).include?("#{request.base_url}/")
+	# 	own_website = true
+	# 	short_portion_of_url = (params[:long_url]).gsub("#{request.base_url}/",'')
+	# 	url = Url.find_by(shortened_url: short_portion_of_url)
+	# else
+	# 	url = Url.find_by(long_url: params[:long_url])
+	# end
+
+	# if (!url.nil?)
+	# 	@flash = "#{url.long_url} has already been added"
+	# 	redirect '/'
+	# else
+	# 	if(own_website)
+	# 		@flash = "No such shortened link exists"
+	# 		redirect '/'
+	# 	else
+	# 		@url = Url.new(long_url: params[:long_url])
+	# 		if @url.save
+	# 			@url.to_json
+	# 		else
+	# 			@flash = "Failed to add url. Please make sure you include 'http://' or 'https://'"
+	# 			redirect '/'
+	# 		end
+	# 	end
+	# end
+
+	@url = Url.new(long_url: params[:long_url])
+	if @url.save
+		@url.to_json
 	else
-		url = Url.find_by(long_url: params[:long_url])
-	end
-
-	if (!url.nil?)
-		@flash = "#{url.long_url} has already been added"
 		redirect '/'
-	else
-		if(own_website)
-			@flash = "No such shortened link exists"
-			redirect '/'
-		else
-			@url = Url.new(long_url: params[:long_url])
-			if @url.save
-				@url.to_json
-			else
-				@flash = "Failed to add url. Please make sure you include 'http://' or 'https://'"
-				redirect '/'
-			end
-		end
-	end
+	end	
+
 end
 
 get '/:short_url' do
