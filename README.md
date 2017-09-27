@@ -1,4 +1,4 @@
-https://bitry.herokuapp.com
+Bitly cloned with Ruby Sinatra https://bitry.herokuapp.com
 
 #Sinatra Web Server
 ## Repo details
